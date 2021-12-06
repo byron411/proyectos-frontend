@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PrivateLayout from 'layouts/PrivateLayout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from 'context/userContext';
-import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client'
+import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
+import {setContext} from '@apollo/client/link/context';
 import Index from 'pages/Index';
 import Page2 from 'pages/Page2';
 import IndexCategory1 from 'pages/category1/Index';
@@ -11,22 +12,53 @@ import IndexUsuarios from 'pages/usuarios';
 import 'styles/globals.css';
 import 'styles/tabla.css'
 import EditarUsuario from 'pages/usuarios/editar';
+import AuthLayaout from 'layouts/AuthLayout';
+import Register from 'pages/auth/register';
+import Login from 'pages/auth/login';
+import { AuthContext } from 'context/authContext';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
 //   uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
 // })
+
+const httplink=createHttpLink({
+    uri:"http://localhost:4000/graphql",
+   });
+  
+   const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = JSON.parse(localStorage.getItem('token'));
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
+
 const client=new ApolloClient({
-  uri:"https://servidor-gql-proyectos.herokuapp.com/graphql",
-  cache:new InMemoryCache()
-})
+  //uri:"https://servidor-gql-proyectos.herokuapp.com/graphql",
+  cache:new InMemoryCache(),
+  link:authLink.concat(httplink),
+  
+});
 function App() {
   const [userData, setUserData] = useState({});
+  const [authToken, setAuthToken]=useState('');
+
+  const setToken=(token)=>{
+      setAuthToken(token)
+      if (token){
+        localStorage.setItem('token',JSON.stringify(token));
+      }
+  }
 
   return (
     <ApolloProvider client ={client}>
     
-    
+    <AuthContext.Provider value={{authToken,setAuthToken,setToken}}>
       <UserContext.Provider value={{ userData, setUserData }}>
         <BrowserRouter>
           <Routes>
@@ -38,10 +70,16 @@ function App() {
               <Route path='category1' element={<IndexCategory1 />} />
               <Route path='category1/page1' element={<Category1 />} />
             </Route>
+
+            <Route path="/auth" element={<AuthLayaout/>}>
+              <Route path='register' element={<Register/>}/>
+              <Route path='login' element={<Login/>}/>
+            </Route>
           </Routes>
+          
         </BrowserRouter>
       </UserContext.Provider>
-    
+      </AuthContext.Provider>
     </ApolloProvider>
   );
 }
