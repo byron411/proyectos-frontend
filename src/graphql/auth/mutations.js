@@ -31,12 +31,14 @@ mutation Login($correo: String!, $password: String!) {
   }
 
 `;
-const VALIDATE_TOKEN=gql`
-mutation validateToken{
-  validateToken{
+const REFRESH_TOKEN=gql`
+mutation RefreshToken{
+  refreshToken{
     token
+    error
+    
 
   }
 }
 `;
-export {REGISTRO,LOGIN,VALIDATE_TOKEN};
+export {REGISTRO,LOGIN,REFRESH_TOKEN};
