@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PrivateLayout from 'layouts/PrivateLayout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from 'context/userContext';
@@ -16,6 +16,7 @@ import AuthLayaout from 'layouts/AuthLayout';
 import Register from 'pages/auth/register';
 import Login from 'pages/auth/login';
 import { AuthContext } from 'context/authContext';
+import jwt_decode from 'jwt-decode';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -53,7 +54,26 @@ function App() {
       if (token){
         localStorage.setItem('token',JSON.stringify(token));
       }
+      else{
+        localStorage.removeItem('token');
+      }
   }
+
+
+   useEffect(() => {
+ 
+    if(authToken){
+      const decoded=jwt_decode(authToken);
+      setUserData({
+        _id:decoded._id,
+        nombre:decoded.nombre,
+        apeliido:decoded.apeliido,
+        identificacion:decoded.identificacion,
+        coreeo:decoded.coreeo,
+        rol:decoded.rol
+      });
+    }
+   }, [authToken]);
 
   return (
     <ApolloProvider client ={client}>
