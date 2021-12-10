@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import DropDown from "components/Dropdown";
 import { Enum_EstadoUsuario } from "utils/enums";
 import { Enum_Rol } from "utils/enums";
+import PrivateRoute from "components/PrivateRouter";
+import PrivateComponent from "components/PrivateComponent";
 
 const EditarUsuario=()=>{
     const { form, formData, updateFormData } = useFormData(null);
@@ -26,7 +28,7 @@ const EditarUsuario=()=>{
 
     const submitForm = (e) => {
         e.preventDefault();
-        delete formData.rol;
+        //delete formData.rol;
         editarUsuario({
           variables: { _id, ...formData },
         });
@@ -49,6 +51,7 @@ const EditarUsuario=()=>{
         }, [mutationData]);
       if(queryLoading) return<div>Cargando...</div>
     return( 
+      <PrivateRoute roleList={["ADMINISTRADOR"]}> 
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
     <Link to='/usuarios'>
       <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
@@ -95,7 +98,17 @@ const EditarUsuario=()=>{
         required={true}
         options={Enum_EstadoUsuario}
       />
-      <span>Rol del usuario: {Enum_Rol[queryData.buscarUsuario.rol]}</span>
+      
+    <PrivateComponent roleList={['ADMINISTRADOR']}>
+      <DropDown
+        label='Rol:'
+        name='rol'
+        defaultValue={queryData.buscarUsuario.rol}
+        required={true}
+        options={Enum_Rol}
+      />:
+    </PrivateComponent>
+    
       <ButtonLoading
         disabled={Object.keys(formData).length === 0}
         loading={mutationLoading}
@@ -103,6 +116,7 @@ const EditarUsuario=()=>{
       />
     </form>
   </div>
+  </PrivateRoute> 
   );
 };
 

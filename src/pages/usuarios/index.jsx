@@ -19,7 +19,8 @@ const IndexUsuarios=()=>{
     }, [error]);
     if(loading) return <div>Cargando...</div>;
     return(
-        <PrivateRoute roleList={["ADMINISTRADOR"]}> 
+       <PrivateRoute roleList={["ADMINISTRADOR"]}> 
+    
         <div>
             Todos los usuarios
             <table className='tabla'>
@@ -57,6 +58,7 @@ const IndexUsuarios=()=>{
             </table>
         </div>
         </PrivateRoute>
+        
     )
 }
 export default IndexUsuarios;

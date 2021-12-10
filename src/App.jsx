@@ -5,9 +5,8 @@ import { UserContext } from 'context/userContext';
 import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 import Index from 'pages/Index';
-import Page2 from 'pages/Page2';
-import IndexCategory1 from 'pages/category1/Index';
-import Category1 from 'pages/category1/CategoryPage1';
+import IndexProyectos from 'pages/proyectos/Index';
+import Admin from 'pages/Admin';
 import IndexUsuarios from 'pages/usuarios';
 import 'styles/globals.css';
 import 'styles/tabla.css'
@@ -68,11 +67,12 @@ function App() {
       setUserData({
         _id:decoded._id,
         nombre:decoded.nombre,
-        apeliido:decoded.apeliido,
+        apellido:decoded.apellido,
         identificacion:decoded.identificacion,
-        coreeo:decoded.coreeo,
+        correo:decoded.correo,
         rol:decoded.rol
       });
+      console.log('EL DECODIVFICADOXXXXXXXXXXXXXXXXXXXXXXXX', decoded);
     }
    }, [authToken]);
 
@@ -87,9 +87,9 @@ function App() {
               <Route path='' element={<Index />} />
               <Route path='/usuarios' element={<IndexUsuarios />} />
               <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
-              <Route path='page2' element={<Page2 />} />
-              <Route path='category1' element={<IndexCategory1 />} />
-              <Route path='category1/page1' element={<Category1 />} />
+              <Route path='admin' element={<Admin />} />
+              <Route path='/proyectos' element={<IndexProyectos/>}/>
+              <Route path='admin/usuarios' element={<IndexUsuarios />} />
             </Route>
 
             <Route path="/auth" element={<AuthLayaout/>}>
