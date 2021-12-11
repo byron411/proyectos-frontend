@@ -7,10 +7,10 @@ const Admin = () => {
   console.log('Aqui tenemos el contexto desde admin.jsx',{userData});
   var rol=userData.rol;
   
-  if (rol==='ADMINISTRADOR'){
+  if (rol==='ADMINISTRADOR' || rol==='LIDER'){
   return (
-    <PrivateComponent roleList={['ADMINISTRADOR']}>
-  <div>Bienvenido {userData.nombre} {userData.apellido}</div>
+    <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
+  <div>Bienvenido {userData.nombre} {userData.apellido}, su rol es: {rol}</div>
   </PrivateComponent>
   );
   }

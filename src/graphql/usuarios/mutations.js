@@ -13,4 +13,21 @@ mutation ModificarUsuario($_id: String!, $nombre: String, $apellido: String, $id
     }
   }
   `
-  export {EDITAR_USUARIO};
+  const ELIMINAR_USUARIO=gql`
+  mutation EliminarUsuario($_id: String!) {
+    eliminarUsuario(_id: $id) {
+      nombre
+    }
+  }
+  `
+  const EDITAR_ESTADO_USUARIO=gql`
+  mutation ModificarUsuario($_id: String!, $estado: Enum_EstadoUsuario) {
+    modificarUsuario(_id: $_id, estado: $estado) {
+      _id
+      nombre
+        estado
+        
+    }
+  }
+  `
+  export {EDITAR_USUARIO,ELIMINAR_USUARIO, EDITAR_ESTADO_USUARIO};

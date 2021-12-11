@@ -5,16 +5,16 @@ import { GET_USUARIO } from "graphql/usuarios/queries";
 import Input from "components/Input";
 import useFormData from 'hooks/useFormData';
 import ButtonLoading from "components/ButtonLoading";
-import { EDITAR_USUARIO } from "graphql/usuarios/mutations";
+import { EDITAR_ESTADO_USUARIO } from "graphql/usuarios/mutations";
 import { toast } from "react-toastify";
 import DropDown from "components/Dropdown";
 import { Enum_EstadoUsuario } from "utils/enums";
 import { Enum_Rol } from "utils/enums";
 import PrivateRoute from "components/PrivateRouter";
 import PrivateComponent from "components/PrivateComponent";
-import { ELIMINAR_USUARIO } from "graphql/usuarios/mutations";
 
-const EditarUsuario=()=>{
+
+const EditarEstadoUsuario=()=>{
     const { form, formData, updateFormData } = useFormData(null);
     const { _id } = useParams();
     
@@ -24,13 +24,13 @@ const EditarUsuario=()=>{
         loading:queryLoading}=useQuery(GET_USUARIO,{
         variables:{_id},
     });
-    const [editarUsuario, {data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_USUARIO);
+    const [editarEstadoUsuario, {data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_ESTADO_USUARIO);
     
 
     const submitForm = (e) => {
         e.preventDefault();
         //delete formData.rol;
-        editarUsuario({
+        editarEstadoUsuario({
           variables: { _id, ...formData },
         });
       };
@@ -52,7 +52,7 @@ const EditarUsuario=()=>{
         }, [mutationData]);
       if(queryLoading) return<div>Cargando...</div>
     return( 
-      <PrivateRoute roleList={["ADMINISTRADOR"]}> 
+      <PrivateRoute roleList={["LIDER"]}> 
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
     <Link to='/usuarios'>
       <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
@@ -64,34 +64,9 @@ const EditarUsuario=()=>{
       ref={form}
       className='flex flex-col items-center justify-center'
     >
-      <Input
-        label='Nombre de la persona:'
-        type='text'
-        name='nombre'
-        defaultValue={queryData.buscarUsuario.nombre}
-        required={true}
-      />
-      <Input
-        label='Apellido de la persona:'
-        type='text'
-        name='apellido'
-        defaultValue={queryData.buscarUsuario.apellido}
-        required={true}
-      />
-      <Input
-        label='Correo de la persona:'
-        type='email'
-        name='correo'
-        defaultValue={queryData.buscarUsuario.correo}
-        required={true}
-      />
-      <Input
-        label='Identificación de la persona:'
-        type='text'
-        name='identificacion'
-        defaultValue={queryData.buscarUsuario.identificacion}
-        required={true}
-      />
+      
+      
+      
       <DropDown
         label='Estado de la persona:'
         name='estado'
@@ -100,16 +75,7 @@ const EditarUsuario=()=>{
         options={Enum_EstadoUsuario}
       />
       
-    <PrivateComponent roleList={['ADMINISTRADOR']}>
-      <DropDown
-        label='Rol:'
-        name='rol'
-        defaultValue={queryData.buscarUsuario.rol}
-        required={true}
-        options={Enum_Rol}
-      />:
-    </PrivateComponent>
-    
+       
       <ButtonLoading
         disabled={Object.keys(formData).length === 0}
         loading={mutationLoading}
@@ -121,4 +87,4 @@ const EditarUsuario=()=>{
   );
 };
 
-export default EditarUsuario;
+export default EditarEstadoUsuario;

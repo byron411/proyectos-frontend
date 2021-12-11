@@ -6,8 +6,16 @@ import { Link } from "react-router-dom";
 import { Enum_Rol } from "utils/enums";
 import { Enum_EstadoUsuario } from "utils/enums";
 import PrivateRoute from "components/PrivateRouter";
+import PrivateComponent from "components/PrivateComponent";
+import { useUser } from 'context/userContext';
+
+
 
 const IndexUsuarios=()=>{
+    const { userData } = useUser();
+    console.log('Aqui tenemos el contexto desde indes de usuario.jsx',{userData});
+    var rolLogueado=userData.rol;
+    
     const {data, error, loading}=useQuery(GET_USUARIOS);
     useEffect(() => {
         console.log('Datos servidor ',data);
@@ -19,7 +27,7 @@ const IndexUsuarios=()=>{
     }, [error]);
     if(loading) return <div>Cargando...</div>;
     return(
-       <PrivateRoute roleList={["ADMINISTRADOR"]}> 
+       <PrivateRoute roleList={["ADMINISTRADOR","LIDER"]}> 
     
         <div>
             Todos los usuarios
@@ -32,7 +40,7 @@ const IndexUsuarios=()=>{
                     <th>Identificación</th>
                     <th>Rol</th>
                     <th>Estado</th>
-                    <th>Editar</th>
+                    <th colSpan={2}>Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,11 +54,27 @@ const IndexUsuarios=()=>{
                         <td>{u.identificacion}</td>
                         <td>{Enum_Rol[u.rol]}</td>
                         <td>{Enum_EstadoUsuario[u.estado]}</td>
+                        {rolLogueado==="ADMINISTRADOR"?
                         <td>
                         <Link to={`/usuarios/editar/${u._id}`}>
                           <i className='fas fa-pen text-yellow-600 hover:text-yellow-400 cursor-pointer' />
-                        </Link>                      
+                        </Link>  
                         </td>
+                    :
+                    <td>
+                        <Link to={`/usuarios/editarEstado/${u._id}`}>
+                          <i className='fas fa-pen text-yellow-600 hover:text-yellow-400 cursor-pointer' />
+                        </Link>  
+                        </td>       
+                    }
+                    
+                        <PrivateComponent roleList={['ADMINISTRADOR']}>
+                        <td>
+                        <Link to={`/usuarios/eliminar/${u._id}`}>
+                          <i className='fas fa-trash-alt text-yellow-600 hover:text-yellow-400 cursor-pointer' />
+                        </Link>
+                        </td>
+                        </PrivateComponent>
                     </tr>
                 );
                 })}

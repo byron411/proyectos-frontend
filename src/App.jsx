@@ -16,6 +16,7 @@ import Register from 'pages/auth/register';
 import Login from 'pages/auth/login';
 import { AuthContext } from 'context/authContext';
 import jwt_decode from 'jwt-decode';
+import EditarEstadoUsuario from 'pages/usuarios/editarEstado';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -87,6 +88,7 @@ function App() {
               <Route path='' element={<Index />} />
               <Route path='/usuarios' element={<IndexUsuarios />} />
               <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
+              <Route path='/usuarios/editarEstado/:_id' element={<EditarEstadoUsuario />} />
               <Route path='admin' element={<Admin />} />
               <Route path='/proyectos' element={<IndexProyectos/>}/>
               <Route path='admin/usuarios' element={<IndexUsuarios />} />
