@@ -46,12 +46,13 @@ const CrearProyecto=()=>{
             <DropDown label='Fase proyecto:' name='fase' required={true} options={Enum_FaseProyecto}/>
             
             <Input label='Líder:' name='lider' type='text' required />
-            {data &&
-            data.buscarLider.map((u)=>{
-              console.log('algo',u.nombre);
-              lista.push(u.nombre)
-            })}
-            <DropDown label= 'Líder' name='lider' options={lista}/>
+                        
+            <DropDown label= 'Líder2' name='lider2' options={data &&
+            data.buscarLider.map((i)=>{
+              return(
+                i.nombre +' '+ i.apellido
+              );
+            })}/>
             {/*<h3>Objetivos</h3>
             <Input label='Descripción:' name='descripcion' type='text' />
             <DropDown label='Tipo objetivo:' name='tipo' options={Enum_TipoObjetivo}/>*/}
