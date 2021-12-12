@@ -27,4 +27,13 @@ query BuscarUsuario($_id: String!) {
   }
 }
 `
-export {GET_USUARIOS, GET_USUARIO};
+const GET_LIDERES=gql`
+query BuscarLider {
+  buscarLider {
+    nombre
+    apellido
+    _id
+  }
+}
+`
+export {GET_USUARIOS, GET_USUARIO,GET_LIDERES};

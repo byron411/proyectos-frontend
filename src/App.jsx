@@ -25,8 +25,8 @@ import { CrearProyecto } from 'pages/proyectos/crearProyecto';
 // })
 
 const httplink=createHttpLink({
-    //uri:"http://localhost:4000/graphql",
-    uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
+    uri:"http://localhost:4000/graphql",
+    //uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
    });
   
    const authLink = setContext((_, { headers }) => {

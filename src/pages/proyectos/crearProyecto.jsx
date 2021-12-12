@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { CREAR_PROYECTO } from "graphql/proyectos/mutations";
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import Input from "components/Input";
 import DropDown from "components/Dropdown";
@@ -9,11 +9,21 @@ import useFormData from "hooks/useFormData";
 import { Enum_EstadoProyecto } from "utils/enums";
 import { Enum_FaseProyecto } from "utils/enums";
 import { Enum_TipoObjetivo } from "utils/enums";
+import { GET_LIDERES } from "graphql/usuarios/queries";
+
+
 
 const CrearProyecto=()=>{
     const {form, formData, updateFormData}=useFormData();
     const[crearProyecto,{data: dataMutation, loading:loadingMutation, error: errorMutation}]=
     useMutation(CREAR_PROYECTO);
+    const lideres=useQuery(GET_LIDERES);
+    //const {data, error, loading}=useQuery(GET_USUARIOS);
+    useEffect(() => {
+      var nombre=lideres.data.buscarLider;
+      console.log('SERA QUE ME HACE EL FAVO DE TRAER',lideres);
+      console.log('ESTE ES EL NOMBRE',nombre)
+    }, [lideres]);
 
     const submitForm=(e)=>{
         formData.presupuesto=parseFloat(formData.presupuesto);
@@ -37,6 +47,9 @@ const CrearProyecto=()=>{
             <DropDown label='Fase proyecto:' name='fase' required={true} options={Enum_FaseProyecto}/>
             
             <Input label='Líder:' name='lider' type='text' required />
+            <DropDown label= 'Líder' name='lider' options={
+              crearProyecto
+              }/>
             {/*<h3>Objetivos</h3>
             <Input label='Descripción:' name='descripcion' type='text' />
             <DropDown label='Tipo objetivo:' name='tipo' options={Enum_TipoObjetivo}/>*/}
