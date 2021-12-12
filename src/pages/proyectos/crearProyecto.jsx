@@ -12,13 +12,12 @@ import { Enum_TipoObjetivo } from "utils/enums";
 import { GET_LIDERES } from "graphql/usuarios/queries";
 
 
-
 const CrearProyecto=()=>{
     const {form, formData, updateFormData}=useFormData();
     const[crearProyecto,{data: dataMutation, loading:loadingMutation, error: errorMutation}]=
     useMutation(CREAR_PROYECTO);
     const {data, error, loading}=useQuery(GET_LIDERES);
-    const lista=[];
+    
     useEffect(() => {
         console.log('RESULTADO QUERY ',data);
         //console.log('entrear',data.buscarLider[0].nombre)
@@ -46,13 +45,13 @@ const CrearProyecto=()=>{
             <DropDown label='Fase proyecto:' name='fase' required={true} options={Enum_FaseProyecto}/>
             
             <Input label='Líder:' name='lider' type='text' required />
-                        
+            {data ?           
             <DropDown label= 'Líder2' name='lider2' options={data &&
             data.buscarLider.map((i)=>{
               return(
                 i.nombre +' '+ i.apellido
               );
-            })}/>
+            })}/>:<div>Se cargó primero el DropDown que el query</div>}
             {/*<h3>Objetivos</h3>
             <Input label='Descripción:' name='descripcion' type='text' />
             <DropDown label='Tipo objetivo:' name='tipo' options={Enum_TipoObjetivo}/>*/}
