@@ -25,6 +25,8 @@ const CrearProyecto=()=>{
 
     const submitForm=(e)=>{
         formData.presupuesto=parseFloat(formData.presupuesto);
+        formData.lider2=parseFloat(formData.lider2);
+        formData.lider=data.buscarLider[formData.lider2]._id;
         e.preventDefault();
         console.log("enviar datos al backedn",formData)
 
@@ -44,7 +46,7 @@ const CrearProyecto=()=>{
             <DropDown label='Estado proyecto:' name='estado' required={true} options={Enum_EstadoProyecto}/>
             <DropDown label='Fase proyecto:' name='fase' required={true} options={Enum_FaseProyecto}/>
             
-            <Input label='Líder:' name='lider' type='text' required />
+            <Input label='Líder:' name='lider' type='text'  />
             {data ?           
             <DropDown label= 'Líder2' name='lider2' options={data &&
             data.buscarLider.map((i)=>{
