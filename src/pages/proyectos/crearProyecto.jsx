@@ -49,7 +49,7 @@ const CrearProyecto=()=>{
             
             
             {data ?           
-            <DropDown label= 'Líder' name='lider' options={data &&
+            <DropDown label= 'Líder' required name='lider' options={data &&
             data.buscarLider.map((i)=>{
               return(
                 i.nombre +' '+ i.apellido
