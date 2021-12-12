@@ -17,13 +17,12 @@ const CrearProyecto=()=>{
     const {form, formData, updateFormData}=useFormData();
     const[crearProyecto,{data: dataMutation, loading:loadingMutation, error: errorMutation}]=
     useMutation(CREAR_PROYECTO);
-    const lideres=useQuery(GET_LIDERES);
-    //const {data, error, loading}=useQuery(GET_USUARIOS);
+    const {data, error, loading}=useQuery(GET_LIDERES);
+    const lista=[];
     useEffect(() => {
-      var nombre=lideres.data.buscarLider;
-      console.log('SERA QUE ME HACE EL FAVO DE TRAER',lideres);
-      console.log('ESTE ES EL NOMBRE',nombre)
-    }, [lideres]);
+        console.log('RESULTADO QUERY ',data);
+        //console.log('entrear',data.buscarLider[0].nombre)
+    }, [data]);
 
     const submitForm=(e)=>{
         formData.presupuesto=parseFloat(formData.presupuesto);
@@ -47,9 +46,12 @@ const CrearProyecto=()=>{
             <DropDown label='Fase proyecto:' name='fase' required={true} options={Enum_FaseProyecto}/>
             
             <Input label='Líder:' name='lider' type='text' required />
-            <DropDown label= 'Líder' name='lider' options={
-              crearProyecto
-              }/>
+            {data &&
+            data.buscarLider.map((u)=>{
+              console.log('algo',u.nombre);
+              lista.push(u.nombre)
+            })}
+            <DropDown label= 'Líder' name='lider' options={lista}/>
             {/*<h3>Objetivos</h3>
             <Input label='Descripción:' name='descripcion' type='text' />
             <DropDown label='Tipo objetivo:' name='tipo' options={Enum_TipoObjetivo}/>*/}
