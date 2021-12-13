@@ -15,6 +15,11 @@ query Proyectos {
     fechaFin
     estado
     fase
+    objetivos {
+      descripcion
+      tipo
+      _id
+    }
   }
 }
 `

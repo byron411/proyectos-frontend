@@ -3,7 +3,7 @@ import { BUSCAR_ESTUDIANTES } from 'graphql/estudiantes/query';
 import { PROYECTOS } from 'graphql/proyectos/query';
 import React, {useEffect} from "react";
 import { Link, } from "react-router-dom";
-import { Enum_EstadoProyecto, Enum_FaseProyecto } from "utils/enums";
+import { Enum_EstadoProyecto, Enum_FaseProyecto,Enum_TipoObjetivo } from "utils/enums";
 
 const IndexProyectos = () => {
 
@@ -18,7 +18,7 @@ const IndexProyectos = () => {
   return (
     
     <div>
-            Todos los usuarios
+            <h1>Proyectos</h1>
             <table className='tabla'>
             <thead>
                 <tr>
@@ -28,6 +28,7 @@ const IndexProyectos = () => {
                     <th>Estado</th>
                     <th>Fase</th>
                     <th>Nombre lider</th>
+                    <th>Objetivos</th>
                     <th colSpan={2}>Editar</th>
                 </tr>
             </thead>
@@ -35,7 +36,9 @@ const IndexProyectos = () => {
             <tbody>
                 {data &&
                     data.Proyectos.map((u)=>{
-                      console.log('QUE TENEMOS EN EL ULIDER',u.lider.nombre);
+                      {/* console.log('QUE TENEMOS EN EL ULIDER',u.lider.nombre);
+                      console.log('QUE TENEMOS EN EL Uobjetivos',u.objetivos.length);
+                       */}
                         return(
                     <tr key={u._id}>
                         <td>{u.nombre}</td>
@@ -44,7 +47,16 @@ const IndexProyectos = () => {
                         <td>{Enum_EstadoProyecto[u.estado]}</td>
                         <td>{Enum_FaseProyecto[u.fase]}</td>
                         <td>{u.lider.nombre+' '+u.lider.apellido}</td>
-                        
+                        <td>
+                               {u.objetivos.map((o)=>{
+                                      return(
+                                        
+                                        <tr>{Enum_TipoObjetivo[o.tipo]+': '+o.descripcion}</tr>
+                                        
+
+                                      );
+                               })}                   
+                        </td>
                         <td>
                         editar  
                         </td>
