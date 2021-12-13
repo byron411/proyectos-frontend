@@ -20,4 +20,11 @@ mutation CrearProyecto($nombre: String!, $presupuesto: Float!, $fechaInicio: Dat
     }
   }
   `
-  export {CREAR_PROYECTO};
+  const CREAR_OBJETIVO=gql`
+  mutation CrearObjetivo($idProyecto: String!, $descripcion: String!, $tipo: Enum_TipoObjetivo!) {
+    crearObjetivo(idProyecto: $idProyecto, descripcion: $descripcion, tipo: $tipo) {
+      nombre
+    }
+  }
+  `
+  export {CREAR_PROYECTO,CREAR_OBJETIVO};

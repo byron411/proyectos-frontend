@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import PrivateComponent from 'components/PrivateComponent';
 import { BUSCAR_ESTUDIANTES } from 'graphql/estudiantes/query';
 import { PROYECTOS } from 'graphql/proyectos/query';
 import React, {useEffect} from "react";
@@ -18,7 +19,7 @@ const IndexProyectos = () => {
   return (
     
     <div>
-            <h1>Proyectos</h1>
+            <h1 className='text-3xl font-bold my-4'>Proyectos</h1>
             <table className='tabla'>
             <thead>
                 <tr>
@@ -58,7 +59,13 @@ const IndexProyectos = () => {
                                })}                   
                         </td>
                         <td>
-                        editar  
+                        <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
+                                <Link to={`/proyectos/crearObjetivo/${u._id}`}>Agregar objetivo</Link>
+                        </PrivateComponent>
+                        
+                        <PrivateComponent roleList={['ESTUDIANTE']}>
+                                <div>Inscripción</div>
+                        </PrivateComponent>
                         </td>
                     
                     

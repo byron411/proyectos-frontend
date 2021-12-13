@@ -19,6 +19,7 @@ import jwt_decode from 'jwt-decode';
 import EditarEstadoUsuario from 'pages/usuarios/editarEstado';
 import { CrearProyecto } from 'pages/proyectos/crearProyecto';
 import { IndexEstudiante } from 'pages/estudiantes/indexEstudiantes';
+import { CrearObjetivo } from 'pages/proyectos/crearObjetivo';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -94,6 +95,7 @@ function App() {
               <Route path='admin' element={<Admin />} />
               <Route path='/proyectos' element={<IndexProyectos/>}/>
               <Route path='/proyectos/crear' element={<CrearProyecto/>}/>
+              <Route path='/proyectos/crearObjetivo/:_id' element={<CrearObjetivo/>}/>
               <Route path='admin/usuarios' element={<IndexUsuarios />} />
               <Route path='estudiantes' element={<IndexEstudiante/>}/>
             </Route>
