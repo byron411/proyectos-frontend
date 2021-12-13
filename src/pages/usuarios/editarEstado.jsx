@@ -52,7 +52,7 @@ const EditarEstadoUsuario=()=>{
         }, [mutationData]);
       if(queryLoading) return<div>Cargando...</div>
     return( 
-      <PrivateRoute roleList={["LIDER"]}> 
+      <PrivateRoute roleList={["LIDER","ADMINISTRADOR"]}> 
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
     <Link to='/usuarios'>
       <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />

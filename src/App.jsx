@@ -18,6 +18,7 @@ import { AuthContext } from 'context/authContext';
 import jwt_decode from 'jwt-decode';
 import EditarEstadoUsuario from 'pages/usuarios/editarEstado';
 import { CrearProyecto } from 'pages/proyectos/crearProyecto';
+import { IndexEstudiante } from 'pages/estudiantes/indexEstudiantes';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -25,8 +26,8 @@ import { CrearProyecto } from 'pages/proyectos/crearProyecto';
 // })
 
 const httplink=createHttpLink({
-    //uri:"http://localhost:4000/graphql",
-    uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
+    uri:"http://localhost:4000/graphql",
+    //uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
    });
   
    const authLink = setContext((_, { headers }) => {
@@ -94,7 +95,7 @@ function App() {
               <Route path='/proyectos' element={<IndexProyectos/>}/>
               <Route path='/proyectos/crear' element={<CrearProyecto/>}/>
               <Route path='admin/usuarios' element={<IndexUsuarios />} />
-
+              <Route path='estudiantes' element={<IndexEstudiante/>}/>
             </Route>
 
             <Route path="/auth" element={<AuthLayaout/>}>

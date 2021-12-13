@@ -7,14 +7,14 @@ import { Enum_Rol } from "utils/enums";
 import { Enum_EstadoUsuario } from "utils/enums";
 import PrivateRoute from "components/PrivateRouter";
 import PrivateComponent from "components/PrivateComponent";
-import { useUser } from 'context/userContext';
+//import { useUser } from 'context/userContext';
 
 
 
 const IndexUsuarios=()=>{
-    const { userData } = useUser();
+    /*const { userData } = useUser();
     console.log('Aqui tenemos el contexto desde indes de usuario.jsx',{userData});
-    var rolLogueado=userData.rol;
+    var rolLogueado=userData.rol;*/
     
     const {data, error, loading}=useQuery(GET_USUARIOS);
     useEffect(() => {
@@ -27,7 +27,7 @@ const IndexUsuarios=()=>{
     }, [error]);
     if(loading) return <div>Cargando...</div>;
     return(
-       <PrivateRoute roleList={["ADMINISTRADOR","LIDER"]}> 
+       <PrivateRoute roleList={["ADMINISTRADOR"]}> 
     
         <div>
             Todos los usuarios
@@ -54,19 +54,13 @@ const IndexUsuarios=()=>{
                         <td>{u.identificacion}</td>
                         <td>{Enum_Rol[u.rol]}</td>
                         <td>{Enum_EstadoUsuario[u.estado]}</td>
-                        {rolLogueado==="ADMINISTRADOR"?
+                        
                         <td>
                         <Link to={`/usuarios/editar/${u._id}`}>
                           <i className='fas fa-pen text-yellow-600 hover:text-yellow-400 cursor-pointer' />
                         </Link>  
                         </td>
-                    :
-                    <td>
-                        <Link to={`/usuarios/editarEstado/${u._id}`}>
-                          <i className='fas fa-pen text-yellow-600 hover:text-yellow-400 cursor-pointer' />
-                        </Link>  
-                        </td>       
-                    }
+                    
                     
                         <PrivateComponent roleList={['ADMINISTRADOR']}>
                         <td>

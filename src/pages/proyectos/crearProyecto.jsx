@@ -1,15 +1,15 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { CREAR_PROYECTO } from "graphql/proyectos/mutations";
 import React, {useEffect} from "react";
-import { Link } from "react-router-dom";
 import Input from "components/Input";
 import DropDown from "components/Dropdown";
 import ButtonLoading from "components/ButtonLoading";
 import useFormData from "hooks/useFormData";
 import { Enum_EstadoProyecto } from "utils/enums";
 import { Enum_FaseProyecto } from "utils/enums";
-import { Enum_TipoObjetivo } from "utils/enums";
 import { GET_LIDERES } from "graphql/usuarios/queries";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 
 const CrearProyecto=()=>{
@@ -20,8 +20,22 @@ const CrearProyecto=()=>{
     
     useEffect(() => {
         console.log('RESULTADO QUERY ',data);
+       
         //console.log('entrear',data.buscarLider[0].nombre)
     }, [data]);
+
+    useEffect(() => {
+      if(dataMutation){
+          toast.success('Proyecto creado');
+      }
+      
+      }, [dataMutation]);
+
+      useEffect(() => {
+        if (errorMutation){
+            toast.error('Error creando proyecto');
+        }
+    }, [errorMutation]);
 
     const submitForm=(e)=>{
         formData.presupuesto=parseFloat(formData.presupuesto);
@@ -36,7 +50,10 @@ const CrearProyecto=()=>{
 
 
     return(
-        <div className='flex flex-col h-full w-full items-center justify-center'>
+        <div className='flex flex-col h-full w-full items-center justify-center p-10'>
+        <Link to='/proyectos'>
+        <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
+      </Link>
         <h1 className='text-3xl font-bold my-4'>Crear Proyecto</h1>
         <form className='flex flex-col' onSubmit={submitForm} onChange={updateFormData} ref={form}>
           <div className='grid grid-cols-2 gap-5'>
@@ -61,7 +78,7 @@ const CrearProyecto=()=>{
           </div>
           <ButtonLoading
             disabled={Object.keys(formData).length === 0}
-            loading={false}
+            loading={loadingMutation}
             text='Crear Proyecto'
           />
         </form>
