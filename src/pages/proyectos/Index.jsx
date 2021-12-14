@@ -85,7 +85,7 @@ const IndexProyectos = () => {
                 );
                 })}
             </tbody>
-            :<div>no hay</div>}
+            :<div>Loading...</div>}
             </table>
 
             <Link to={`/proyectos/crear`}>CrearProyecto

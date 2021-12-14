@@ -28,9 +28,7 @@ query BuscarProyectoById($_id: String!) {
   buscarProyectoById(_id: $_id) {
     _id
     nombre
-  nombre
     presupuesto
-  presupuesto
     fechaInicio
     fechaFin
     estado
@@ -39,6 +37,11 @@ query BuscarProyectoById($_id: String!) {
       _id
       nombre
       apellido
+    }
+    objetivos {
+      _id
+      descripcion
+      tipo
     }
   }
 }

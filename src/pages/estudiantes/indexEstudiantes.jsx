@@ -16,7 +16,7 @@ const IndexEstudiante=()=>{
     }, [data])
     return (
         <div>
-        Estudiantes
+        <h1  className='text-3xl font-bold my-4'>Estudiantes</h1>
         <table className='tabla'>
         <thead>
             <tr>
