@@ -30,6 +30,7 @@ import { EditarProyecto } from 'pages/proyectos/editarProyecto';
 const httplink=createHttpLink({
     //uri:"http://localhost:4000/graphql",
     uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
+    //uri:"https://neklo.herokuapp.com/graphql"
    });
   
    const authLink = setContext((_, { headers }) => {
