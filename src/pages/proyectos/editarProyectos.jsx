@@ -13,6 +13,7 @@ import { EDITAR_PROYECTO } from "graphql/proyectos/mutations";
 import { Enum_EstadoProyecto } from "utils/enums";
 import { Enum_FaseProyecto } from "utils/enums";
 import { GET_USUARIO } from "graphql/usuarios/queries";
+import { GET_LIDERES } from "graphql/usuarios/queries";
 
 
 const EditarProyectos=()=>{
@@ -25,13 +26,22 @@ const EditarProyectos=()=>{
         variables:{_id},
     });
 
-    
+    const {data,error,loading}=useQuery(GET_LIDERES);
+    let lideres={
+        lider1:'byr',
+        lider2:'gael',
+    }
+    if(data){
+
+    }
     
     //const [editarEstadoUsuario, {data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_ESTADO_USUARIO);
     const [editarProyecto,{data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_PROYECTO);
     const submitForm = (e) => {
         e.preventDefault();
         //console.log('FORM DATA', _id, formData);
+        let pos=parseInt(formData.lider);
+        formData.lider=data.buscarLider[pos]._id;
         formData.presupuesto=parseFloat(formData.presupuesto);
         editarProyecto({
             variables:{_id,...formData},
@@ -39,6 +49,7 @@ const EditarProyectos=()=>{
       }
       
       useEffect(() => {
+          
         if(mutationData){
             toast.success('Proyecto modificado');
         }
@@ -75,8 +86,8 @@ const EditarProyectos=()=>{
        //console.log('QUERY', queryData.buscarProyectoById.estado);
        let fechas=cambiar();
        //console.log('FORMATOS:',fechas.inicio );
-       let idLider=queryData.buscarProyectoById.lider._id
-       console.log('ID DE LIDER',idLider)
+       
+      
        
     
     return(
@@ -140,14 +151,16 @@ const EditarProyectos=()=>{
        defaultValue={fechas.fin}
         required />
        
-       {/* <DropDown
-          label='Líder:'
-          name='lider'
-          //defaultValue={queryData.buscarProyectoById.fase}
-          required={true}
-          options={['byr','gal']}
-      /> */}
-
+       {data ?           
+            <DropDown label= 'Líder'  name='lider' 
+            //defaultValue={queryData.buscarProyectoById.lider.nombre}
+             options={data &&
+            data.buscarLider.map((i)=>{
+              return(
+                i.nombre +' '+ i.apellido
+              );
+            })}/>:<div>Se cargó primero el DropDown que el query</div>}
+        
       <ButtonLoading
         disabled={Object.keys(formData).length === 0}
         loading={mutationLoading}
