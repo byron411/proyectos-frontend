@@ -20,6 +20,7 @@ import EditarEstadoUsuario from 'pages/usuarios/editarEstado';
 import { CrearProyecto } from 'pages/proyectos/crearProyecto';
 import { IndexEstudiante } from 'pages/estudiantes/indexEstudiantes';
 import { CrearObjetivo } from 'pages/proyectos/crearObjetivo';
+import { EditarProyecto } from 'pages/proyectos/editarProyecto';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -96,6 +97,7 @@ function App() {
               <Route path='/proyectos' element={<IndexProyectos/>}/>
               <Route path='/proyectos/crear' element={<CrearProyecto/>}/>
               <Route path='/proyectos/crearObjetivo/:_id' element={<CrearObjetivo/>}/>
+              <Route path='/proyectos/editarProyecto/:_id' element={<EditarProyecto/>}/>
               <Route path='admin/usuarios' element={<IndexUsuarios />} />
               <Route path='estudiantes' element={<IndexEstudiante/>}/>
             </Route>

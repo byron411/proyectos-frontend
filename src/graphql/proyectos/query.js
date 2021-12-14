@@ -23,4 +23,24 @@ query Proyectos {
   }
 }
 `
-export {PROYECTOS};
+const GET_PROYECTO=gql`
+query BuscarProyectoById($_id: String!) {
+  buscarProyectoById(_id: $_id) {
+    _id
+    nombre
+  nombre
+    presupuesto
+  presupuesto
+    fechaInicio
+    fechaFin
+    estado
+    fase
+    lider {
+      _id
+      nombre
+      apellido
+    }
+  }
+}
+`
+export {PROYECTOS,GET_PROYECTO};

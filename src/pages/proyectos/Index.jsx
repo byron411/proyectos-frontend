@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import PrivateComponent from 'components/PrivateComponent';
+import PrivateRoute from 'components/PrivateRouter';
 import { BUSCAR_ESTUDIANTES } from 'graphql/estudiantes/query';
 import { PROYECTOS } from 'graphql/proyectos/query';
 import React, {useEffect} from "react";
@@ -29,6 +30,7 @@ const IndexProyectos = () => {
                     <th>Estado</th>
                     <th>Fase</th>
                     <th>Nombre lider</th>
+                    <th>presupuesto</th>
                     <th>Objetivos</th>
                     <th colSpan={2}>Editar</th>
                 </tr>
@@ -48,19 +50,28 @@ const IndexProyectos = () => {
                         <td>{Enum_EstadoProyecto[u.estado]}</td>
                         <td>{Enum_FaseProyecto[u.fase]}</td>
                         <td>{u.lider.nombre+' '+u.lider.apellido}</td>
+                        <td>{new Intl.NumberFormat("co-CO",{style:"currency",currency:"COP"}).format(u.presupuesto)}</td>
                         <td>
                                {u.objetivos.map((o)=>{
                                       return(
+                                        <div>
+                                        <tr>{Enum_TipoObjetivo[o.tipo]+': '+o.descripcion}
                                         
-                                        <tr>{Enum_TipoObjetivo[o.tipo]+': '+o.descripcion}</tr>
-                                        
-
+                                        </tr>
+                                        </div>
                                       );
-                               })}                   
+                               })}   
+                               <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
+                               <Link to={`/proyectos/crearObjetivo/${u._id}`}>
+                               <i class="fas fa-plus"> Add</i>
+                               </Link>
+                               </PrivateComponent>                
                         </td>
                         <td>
                         <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
-                                <Link to={`/proyectos/crearObjetivo/${u._id}`}>Agregar objetivo</Link>
+                                <Link to={`/proyectos/editarProyecto/${u._id}`}>
+                                <i className='fas fa-pen text-yellow-600 hover:text-yellow-400 cursor-pointer' />
+                                </Link>
                         </PrivateComponent>
                         
                         <PrivateComponent roleList={['ESTUDIANTE']}>

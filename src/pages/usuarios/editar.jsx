@@ -25,7 +25,7 @@ const EditarUsuario=()=>{
         variables:{_id},
     });
     const [editarUsuario, {data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_USUARIO);
-    
+    console.log('EL USUARIO',queryData);
 
     const submitForm = (e) => {
         e.preventDefault();
