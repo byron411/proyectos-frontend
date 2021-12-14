@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import { LOGIN } from "graphql/auth/mutations";
 import { useAuth } from "context/authContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login=()=>{
     const navigate=useNavigate();
@@ -23,11 +24,35 @@ const Login=()=>{
     useEffect(() => {
         console.log('datos mutacion', dataMutation);
         if(dataMutation){
-        if(dataMutation.login.token){
+        // if(dataMutation.login.token!=='incorrectpass' && dataMutation.login.token
+        // && dataMutation.login.token!=='notuser'){
+        //   setToken(dataMutation.login.token);
+        //     navigate('/');
+        //     //console.log('ESTE ES EL TOKEN', dataMutation.login.token);
+        // }
+        // else{
+        //   console.log('Usuario o contraseña incorrectos');
+        //   toast('Usuario o contraseña incorrectos')
+        // }
+        if(dataMutation.login.token==='incorrectpass'){
+          alert('Contraseña incorrecta');
+        }
+        else if(dataMutation.login.token==='notuser'){
+          alert('Usuario no existe');
+        }
+        else if(dataMutation.login.token){
           setToken(dataMutation.login.token);
-            navigate('/');
-        }}
+             navigate('/');
+        }
+        
+      }
     }, [dataMutation, setToken, navigate]);
+
+    useEffect(() => {
+      if(mutationError){
+        toast('Ha ocurrido un error');
+      }
+    }, [mutationError])
 
     return (
         <div className='flex flex-col items-center justify-center w-full h-full p-10'>
