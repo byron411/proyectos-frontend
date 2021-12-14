@@ -12,6 +12,7 @@ import { GET_PROYECTO } from "graphql/proyectos/query";
 import { EDITAR_PROYECTO } from "graphql/proyectos/mutations";
 import { Enum_EstadoProyecto } from "utils/enums";
 import { Enum_FaseProyecto } from "utils/enums";
+import { GET_USUARIO } from "graphql/usuarios/queries";
 
 
 const EditarProyectos=()=>{
@@ -23,7 +24,9 @@ const EditarProyectos=()=>{
         loading:queryLoading}=useQuery(GET_PROYECTO,{
         variables:{_id},
     });
-    //console.log('QUERY', queryData.buscarProyectoById.estado);
+
+    
+    
     //const [editarEstadoUsuario, {data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_ESTADO_USUARIO);
     const [editarProyecto,{data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_PROYECTO);
     const submitForm = (e) => {
@@ -34,7 +37,7 @@ const EditarProyectos=()=>{
             variables:{_id,...formData},
         });        
       }
-    
+      
       useEffect(() => {
         if(mutationData){
             toast.success('Proyecto modificado');
@@ -52,6 +55,30 @@ const EditarProyectos=()=>{
             }
         }, [queryError, mutationError]);
         if(queryLoading) return<div>Cargando...</div>
+
+       
+        const cambiar=()=>{
+            let formato=queryData.buscarProyectoById.fechaInicio;
+            let formatofin=queryData.buscarProyectoById.fechaFin;
+        var newFormato="";
+        let newFormatoFin="";
+       
+        for(let i=0;i<10;i++){
+            //console.log('EL INDEX',formato[i]);
+             newFormato=newFormato+formato[i];   
+             newFormatoFin=newFormatoFin+formatofin[i];  
+        }
+        
+            
+            return {inicio:newFormato, fin:newFormatoFin};
+        }
+       //console.log('QUERY', queryData.buscarProyectoById.estado);
+       let fechas=cambiar();
+       //console.log('FORMATOS:',fechas.inicio );
+       let idLider=queryData.buscarProyectoById.lider._id
+       console.log('ID DE LIDER',idLider)
+       
+    
     return(
         <PrivateRoute roleList={["LIDER","ADMINISTRADOR"]}> 
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
@@ -96,7 +123,31 @@ const EditarProyectos=()=>{
         defaultValue={queryData.buscarProyectoById.presupuesto}
         required={true}
       />
+
+        <Input 
+        label='Fecha de inicio:' 
+        name='fechaInicio' 
+        type='date' 
+        //defaultValue='2021-12-15'
+       defaultValue={fechas.inicio}
+        required />
+        
+        <Input 
+        label='Fecha fin:' 
+        name='fechaFin' 
+        type='date' 
+        //defaultValue='2021-12-15'
+       defaultValue={fechas.fin}
+        required />
        
+       {/* <DropDown
+          label='Líder:'
+          name='lider'
+          //defaultValue={queryData.buscarProyectoById.fase}
+          required={true}
+          options={['byr','gal']}
+      /> */}
+
       <ButtonLoading
         disabled={Object.keys(formData).length === 0}
         loading={mutationLoading}
@@ -106,5 +157,6 @@ const EditarProyectos=()=>{
   </div>
   </PrivateRoute>
     );
+    
 }
 export {EditarProyectos};

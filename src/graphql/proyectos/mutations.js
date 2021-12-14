@@ -28,12 +28,18 @@ mutation CrearProyecto($nombre: String!, $presupuesto: Float!, $fechaInicio: Dat
   }
   `
   const EDITAR_PROYECTO=gql`
-  mutation ModificarProyecto($_id: String!, $estado: Enum_EstadoProyecto, $nombre: String, $fase: Enum_FaseProyecto, $presupuesto: Float) {
-    modificarProyecto(_id: $_id, estado: $estado, nombre: $nombre, fase: $fase, presupuesto: $presupuesto) {
+  mutation ModificarProyecto($_id: String!, $estado: Enum_EstadoProyecto, $nombre: String, $fase: Enum_FaseProyecto, $presupuesto: Float,$fechaInicio: Date, $fechaFin: Date, $lider: String) {
+    modificarProyecto(_id: $_id, estado: $estado, nombre: $nombre, fase: $fase, presupuesto: $presupuesto,fechaInicio: $fechaInicio, fechaFin: $fechaFin, lider: $lider) {
       estado
       nombre
       fase
       presupuesto
+      fechaInicio
+      fechaFin
+      lider {
+        _id
+        nombre
+      }
     }
   }
   `
