@@ -63,7 +63,7 @@ const IndexProyectos = () => {
                                })}   
                                <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
                                <Link to={`/proyectos/crearObjetivo/${u._id}`}>
-                               <i class="fas fa-plus"> Add</i>
+                               <i class="fas fa-plus text-yellow-600 hover:text-yellow-400 cursor-pointer"> Add</i>
                                </Link>
                                </PrivateComponent>                
                         </td>

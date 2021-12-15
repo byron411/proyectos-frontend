@@ -26,27 +26,11 @@ const EditarProyectos=()=>{
         variables:{_id},
     });
 
-    const {data,error,loading}=useQuery(GET_LIDERES);
-    let lideres={
-        lider1:'byr',
-        lider2:'gael',
-    }
-    if(data){
-
-    }
+   
     
     //const [editarEstadoUsuario, {data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_ESTADO_USUARIO);
     const [editarProyecto,{data:mutationData, loading:mutationLoading,error:mutationError}]=useMutation(EDITAR_PROYECTO);
-    const submitForm = (e) => {
-        e.preventDefault();
-        //console.log('FORM DATA', _id, formData);
-        let pos=parseInt(formData.lider);
-        formData.lider=data.buscarLider[pos]._id;
-        formData.presupuesto=parseFloat(formData.presupuesto);
-        editarProyecto({
-            variables:{_id,...formData},
-        });        
-      }
+    
       
       useEffect(() => {
           
@@ -56,7 +40,8 @@ const EditarProyectos=()=>{
         console.log("Mutacion edicion", mutationData);
         }, [mutationData]);
 
-    
+        const {data,error,loading}=useQuery(GET_LIDERES);
+        console.log('DATA',data);
         useEffect(() => {
             if(queryError){
                 toast.error('Error listando proyecto');
@@ -67,7 +52,7 @@ const EditarProyectos=()=>{
         }, [queryError, mutationError]);
         if(queryLoading) return<div>Cargando...</div>
 
-       
+        
         const cambiar=()=>{
             let formato=queryData.buscarProyectoById.fechaInicio;
             let formatofin=queryData.buscarProyectoById.fechaFin;
@@ -83,15 +68,30 @@ const EditarProyectos=()=>{
             
             return {inicio:newFormato, fin:newFormatoFin};
         }
+
        //console.log('QUERY', queryData.buscarProyectoById.estado);
        let fechas=cambiar();
        //console.log('FORMATOS:',fechas.inicio );
        
-      
+       const submitForm = (e) => {
+        e.preventDefault();
+        if(formData.lider){
+        let pos=parseInt(formData.lider);
+        formData.lider=data.buscarLider[pos]._id;
+        }
+        //console.log('QUE SE VA A ENVIAR',formData,'EL ID CONVERTIDO',formData.lider);
+        //console.log('FORM DATA', _id, formData);
+        // if(data){
+        formData.presupuesto=parseFloat(formData.presupuesto);
+        editarProyecto({
+             variables:{_id,...formData},
+         });        
+      }
        
     
     return(
         <PrivateRoute roleList={["LIDER","ADMINISTRADOR"]}> 
+        {data?
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
     <Link to='/proyectos'>
       <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
@@ -153,7 +153,8 @@ const EditarProyectos=()=>{
        
        {data ?           
             <DropDown label= 'Líder'  name='lider' 
-            //defaultValue={queryData.buscarProyectoById.lider.nombre}
+            //defaultValue={[queryData.buscarProyectoById.lider.nombre]}
+            
              options={data &&
             data.buscarLider.map((i)=>{
               return(
@@ -168,6 +169,7 @@ const EditarProyectos=()=>{
       />
     </form>
   </div>
+  :<div>data</div>}
   </PrivateRoute>
     );
     
