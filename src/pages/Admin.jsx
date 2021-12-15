@@ -6,7 +6,7 @@ const Admin = () => {
   const { userData } = useUser();
   console.log('Aqui tenemos el contexto desde admin.jsx',{userData});
   var rol=userData.rol;
-  
+  if(userData){
   if (rol==='ADMINISTRADOR' ){
   return (
     <PrivateComponent roleList={['ADMINISTRADOR']}>
@@ -22,6 +22,12 @@ const Admin = () => {
     </div>
     );
   }
+}
+else{
+  return(
+    <div>NO se ha iniciado sesión</div>
+  );
+}
 };
 
 export default Admin;
