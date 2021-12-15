@@ -10,6 +10,7 @@ import { Enum_FaseProyecto } from "utils/enums";
 import { GET_LIDERES } from "graphql/usuarios/queries";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import PrivateRoute from "components/PrivateRouter";
 
 
 const CrearProyecto=()=>{
@@ -50,6 +51,7 @@ const CrearProyecto=()=>{
 
 
     return(
+      <PrivateRoute roleList={["ADMINISTRADOR","LIDER"]}>
         <div className='flex flex-col h-full w-full items-center justify-center p-10'>
         <Link to='/proyectos'>
         <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
@@ -84,6 +86,7 @@ const CrearProyecto=()=>{
         </form>
         
       </div>
+      </PrivateRoute>
     );
 };
 export {CrearProyecto};
