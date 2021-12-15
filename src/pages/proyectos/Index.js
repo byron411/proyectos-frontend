@@ -21,6 +21,9 @@ const IndexProyectos = () => {
     
     <div>
             <h1 className='text-3xl font-bold my-4'>Proyectos</h1>
+            <Link to={`/proyectos/crear`}>CrearProyecto
+            <i className='fas fa-file-alt' />
+            </Link>
             <table className='tabla'>
             <thead>
                 <tr>
@@ -88,9 +91,6 @@ const IndexProyectos = () => {
             :<div>Loading...</div>}
             </table>
 
-            <Link to={`/proyectos/crear`}>CrearProyecto
-            <i className='fas fa-file-alt' />
-            </Link>
         </div>
 
     

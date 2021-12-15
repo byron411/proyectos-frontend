@@ -21,6 +21,9 @@ import { CrearProyecto } from 'pages/proyectos/crearProyecto';
 import { IndexEstudiante } from 'pages/estudiantes/indexEstudiantes';
 import { CrearObjetivo } from 'pages/proyectos/crearObjetivo';
 import { EditarProyectos } from 'pages/proyectos/editarProyectos';
+import { IndexProyectosPublic } from 'pages/proyectosPublic';
+import { EditarProyectoPublico } from 'pages/proyectosPublic/editarPyectoPublico';
+import { ProyectosByLider } from 'pages/proyectosPublic/proyectosByLider';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -28,8 +31,8 @@ import { EditarProyectos } from 'pages/proyectos/editarProyectos';
 // })
 
 const httplink=createHttpLink({
-    //uri:"http://localhost:4000/graphql",
-uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
+    uri:"http://localhost:4000/graphql",
+    //uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
     
    });
   
@@ -95,12 +98,15 @@ function App() {
               <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
               <Route path='/usuarios/editarEstado/:_id' element={<EditarEstadoUsuario />} />
               <Route path='admin' element={<Admin />} />
-              <Route path='/proyectos' element={<IndexProyectos/>}/>
+              <Route path='admin/proyectos' element={<IndexProyectos/>}/>
               <Route path='/proyectos/crear' element={<CrearProyecto/>}/>
               <Route path='/proyectos/crearObjetivo/:_id' element={<CrearObjetivo/>}/>
               <Route path='/proyectos/editarProyecto/:_id' element={<EditarProyectos/>}/>
               <Route path='admin/usuarios' element={<IndexUsuarios />} />
               <Route path='estudiantes' element={<IndexEstudiante/>}/>
+              <Route path='allProjects' element={<IndexProyectosPublic/>}/>
+              <Route path='/allProjects/liderEditarProyecto/:_id' element={<EditarProyectoPublico/>}/>
+              <Route path='/proyectosByLider/:_id' element={<ProyectosByLider/>}/>
             </Route>
 
             <Route path="/auth" element={<AuthLayaout/>}>

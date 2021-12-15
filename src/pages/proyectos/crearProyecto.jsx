@@ -51,9 +51,9 @@ const CrearProyecto=()=>{
 
 
     return(
-      <PrivateRoute roleList={["ADMINISTRADOR","LIDER"]}>
+      <PrivateRoute roleList={["ADMINISTRADOR"]}>
         <div className='flex flex-col h-full w-full items-center justify-center p-10'>
-        <Link to='/proyectos'>
+        <Link to='/admin/proyectos'>
         <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
       </Link>
         <h1 className='text-3xl font-bold my-4'>Crear Proyecto</h1>
