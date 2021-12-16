@@ -24,12 +24,8 @@ const IndexProyectosPublic=()=>{
     //     console.log('LOS LIDERES',datal);
     //  }, [datal])
     let idsLideres=[]; 
-    let estado='';
-    if(datal.data){
-    datal.data.buscarLider.map((u)=>{
-        console.log(u._id);
-        idsLideres.push(u._id);
-    });}
+    
+    
     
     // if(data){
     //     data.Proyectos.map()=>
@@ -41,7 +37,11 @@ const IndexProyectosPublic=()=>{
     }, [error])
     
     if (loading) return<div>Cargando...</div>;
-    
+    if(datal.data){
+        datal.data.buscarLider.map((u)=>{
+            console.log(u._id);
+            idsLideres.push(u._id);
+        });}
     const submitForm = (e) => {
         e.preventDefault();
         let ellider=idsLideres[formData.lider];
@@ -64,13 +64,11 @@ const IndexProyectosPublic=()=>{
             <DropDown label= 'Buscar por líder'  name='lider' 
             //defaultValue={[queryData.buscarProyectoById.lider.nombre]}
             
-             options={data &&
-            datal.data.buscarLider.map((i)=>{
-              return(
-                i.nombre +' '+ i.apellido
-              );
-            })
-            } 
+             options={
+                 
+                 data && datal.data &&
+            datal.data.buscarLider.map((i)=>{return(i.nombre +' '+ i.apellido);})
+            }
             />:<div>Cargando...</div>} 
             <ButtonLoading
         disabled={Object.keys(formData).length === 0}
