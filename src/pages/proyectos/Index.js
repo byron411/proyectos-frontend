@@ -18,10 +18,10 @@ const IndexProyectos = () => {
     }, [data])
 
   return (
-    
+    <PrivateRoute roleList={['ADMINISTRADOR']}>
     <div>
             <h1 className='text-3xl font-bold my-4'>Proyectos</h1>
-            <Link to={`/proyectos/crear`}>CrearProyecto
+            <Link to={`/proyectos/crear`}>Crear Proyecto
             <i className='fas fa-file-alt' />
             </Link>
             <table className='tabla'>
@@ -92,7 +92,7 @@ const IndexProyectos = () => {
             </table>
 
         </div>
-
+</PrivateRoute>
     
   );
 };

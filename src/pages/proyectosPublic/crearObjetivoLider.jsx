@@ -11,7 +11,7 @@ import ButtonLoading from "components/ButtonLoading";
 import Input from "components/Input";
 import { toast } from "react-toastify";
 
-const CrearObjetivo=()=>{
+const CrearObjetivoLider=()=>{
     const { form, formData, updateFormData } = useFormData(null);
     const { _id } = useParams();
     console.log('EL ID DEL PROYECTO',_id);
@@ -40,9 +40,9 @@ const CrearObjetivo=()=>{
     }, [mutationError])
 
     return(
-        <PrivateRoute roleList={["ADMINISTRADOR"]}> 
+        <PrivateRoute roleList={["LIDER","ADMINISTRADOR"]}> 
     <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-    <Link to='/admin/proyectos'>
+    <Link to='/allProjects'>
       <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
     </Link>
     <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Crear objetivo</h1>
@@ -71,4 +71,4 @@ const CrearObjetivo=()=>{
   </PrivateRoute> 
     );
 };
-export {CrearObjetivo};
+export {CrearObjetivoLider};

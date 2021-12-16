@@ -23,6 +23,7 @@ const EditarProyectoPublico=()=>{
     console.log('EL PROYECTO',queryData);
     const submitForm=(e)=>{
         e.preventDefault();
+        formData.presupuesto=parseFloat(formData.presupuesto);
         editarProyecto({
             variables:{_id, ...formData},
         });
@@ -59,7 +60,13 @@ const EditarProyectoPublico=()=>{
                 name='nombre'
                 defaultValue={queryData.buscarProyectoById.nombre}
                 required={true}/>
-
+               <Input
+        label='Presupuesto:'
+        type='number'
+        name='presupuesto'
+        defaultValue={queryData.buscarProyectoById.presupuesto}
+        required={true}
+      />
                     <ButtonLoading
                     disabled={Object.keys(formData).length === 0}
                     loading={mutationLoading}

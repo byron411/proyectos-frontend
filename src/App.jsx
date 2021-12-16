@@ -24,6 +24,8 @@ import { EditarProyectos } from 'pages/proyectos/editarProyectos';
 import { IndexProyectosPublic } from 'pages/proyectosPublic';
 import { EditarProyectoPublico } from 'pages/proyectosPublic/editarPyectoPublico';
 import { ProyectosByLider } from 'pages/proyectosPublic/proyectosByLider';
+import { CrearObjetivoLider } from 'pages/proyectosPublic/crearObjetivoLider';
+import { CrearProyectoLider } from 'pages/proyectosPublic/crearProyectoLider';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -107,6 +109,8 @@ function App() {
               <Route path='allProjects' element={<IndexProyectosPublic/>}/>
               <Route path='/allProjects/liderEditarProyecto/:_id' element={<EditarProyectoPublico/>}/>
               <Route path='/proyectosByLider/:_id' element={<ProyectosByLider/>}/>
+              <Route path='/proyectosByLider/crearObjetivoLider/:_id' element={<CrearObjetivoLider/>}/>
+              <Route path='/proyectosByLider/crearProyectoLider/:_id' element={<CrearProyectoLider/>}/>
             </Route>
 
             <Route path="/auth" element={<AuthLayaout/>}>
