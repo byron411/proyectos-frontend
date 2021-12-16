@@ -26,6 +26,7 @@ import { EditarProyectoPublico } from 'pages/proyectosPublic/editarPyectoPublico
 import { ProyectosByLider } from 'pages/proyectosPublic/proyectosByLider';
 import { CrearObjetivoLider } from 'pages/proyectosPublic/crearObjetivoLider';
 import { CrearProyectoLider } from 'pages/proyectosPublic/crearProyectoLider';
+import { IndexInscripcion } from 'pages/inscripcion/indexInscripcion';
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -33,8 +34,8 @@ import { CrearProyectoLider } from 'pages/proyectosPublic/crearProyectoLider';
 // })
 
 const httplink=createHttpLink({
-    //uri:"http://localhost:4000/graphql",
-    uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
+    uri:"http://localhost:4000/graphql",
+    //uri:"https://servidor-gql-proyectos.herokuapp.com/graphql"
     
    });
   
@@ -111,6 +112,7 @@ function App() {
               <Route path='/proyectosByLider/:_id' element={<ProyectosByLider/>}/>
               <Route path='/proyectosByLider/crearObjetivoLider/:_id' element={<CrearObjetivoLider/>}/>
               <Route path='/proyectosByLider/crearProyectoLider/:_id' element={<CrearProyectoLider/>}/>
+              <Route path='/inscripciones' element={<IndexInscripcion/>}/>
             </Route>
 
             <Route path="/auth" element={<AuthLayaout/>}>
