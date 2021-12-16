@@ -67,13 +67,16 @@ const ProyectosByLider=()=>{
                         {u.objetivos.map((o)=>{
                                       return(
                                         <div>
-                                        <tr>{Enum_TipoObjetivo[o.tipo]+': '+o.descripcion}
+                                        <tr>
+                                        
+                                        {Enum_TipoObjetivo[o.tipo]+': '+o.descripcion}
                                         
                                         </tr>
                                         </div>
                                       );
                                })} 
                                <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
+                               
                                {
                                 Enum_EstadoProyecto[u.estado]==='Activo'?
                                 <div>

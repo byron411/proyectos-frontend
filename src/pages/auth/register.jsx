@@ -9,6 +9,7 @@ import { REGISTRO } from "graphql/auth/mutations";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router";
 import { useAuth } from "context/authContext";
+import { toast } from "react-toastify";
 
 const Register=()=>{
   const {setToken}=useAuth
@@ -23,17 +24,27 @@ const Register=()=>{
         e.preventDefault();
         console.log("enviar datos al backedn",formData)
         registro({variables:formData});
+       
     };
 
     useEffect(() => {
         console.log('datos mutacion', dataMutation);
         if(dataMutation){
         if(dataMutation.registro.token){
-          setToken(dataMutation.registro.token);
+          
+         // setToken(dataMutation.registro.token);
             navigate('/');
-        }}
+        }
+      
+      }
     }, [dataMutation, setToken,navigate]);
 
+    useEffect(() => {
+      if(errorMutation){
+        toast.error('Ha ocurrido un error');
+      }
+    }, [errorMutation])
+    if(loadingMutation) return <div>cargando</div>;
     return(
         <div className='flex flex-col h-full w-full items-center justify-center'>
         <h1 className='text-3xl font-bold my-4'>Regístrate</h1>
