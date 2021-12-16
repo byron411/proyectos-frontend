@@ -60,14 +60,16 @@ const IndexProyectosPublic=()=>{
       ref={form}
       className='flex flex-col items-center justify-center'    >
       
-      {datal && data?           
+      {datal.data && data?           
             <DropDown label= 'Buscar por líder'  name='lider' 
             //defaultValue={[queryData.buscarProyectoById.lider.nombre]}
             
              options={
+                 datal.data?data &&
+                 datal.data.buscarLider.map((i)=>{
+                    return(i.nombre +' '+ i.apellido);
+                 }):<div>Cargando...</div>
                  
-                 data && datal.data &&
-            datal.data.buscarLider.map((i)=>{return(i.nombre +' '+ i.apellido);})
             }
             />:<div>Cargando...</div>} 
             <ButtonLoading
