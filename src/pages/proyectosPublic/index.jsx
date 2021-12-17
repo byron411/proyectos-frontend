@@ -11,6 +11,7 @@ import { Enum_EstadoProyecto, Enum_FaseProyecto,Enum_TipoObjetivo } from "utils/
 import PrivateComponent from "components/PrivateComponent";
 import { useUser } from "context/userContext";
 import { CREAR_INSCRIPCION } from "graphql/inscripcion/mutation";
+import { INSCRIPCIONES_BY_ESTUDIANTE } from "graphql/inscripcion/query";
 const IndexProyectosPublic=()=>{
     const {data, error, loading}=useQuery(PROYECTOS);
     const datal=useQuery(GET_LIDERES);
@@ -20,8 +21,14 @@ const IndexProyectosPublic=()=>{
     const {userData}=useUser()
     console.log('AQUI TENEMOS EL USERDATA',{userData});
     let estudiante=userData._id;
-    //console.log('aAQUI TENEMO S SOLO EL ID',estudiante);
+    //console.log('aAQUI TENEMO S SOLO EL ID',typeof(estudiante));
     const [crearInscripcion,{datai:mutationDatai,loadingi:loadini,errori:errori}]=useMutation(CREAR_INSCRIPCION);
+    // const {
+    //     data:queryData, 
+    //     error:queryError, 
+    //     loading:queryLoading}=useQuery(INSCRIPCIONES_BY_ESTUDIANTE,{
+    //     variables:estudiante,
+    // });
     useEffect(() => {
         if(data){
         console.log('TODOS LOS PROYECTOS',data);
