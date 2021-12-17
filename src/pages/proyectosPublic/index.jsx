@@ -109,13 +109,11 @@ const IndexProyectosPublic=()=>{
                         <td>{Enum_FaseProyecto[u.fase]}</td>
                         <td>{u.lider.nombre+' '+u.lider.apellido}</td>
                         <td>{new Intl.NumberFormat("co-CO",{style:"currency",currency:"COP"}).format(u.presupuesto)}</td>
-                        
+                        <td>
                                {u.objetivos.map((o)=>{
                                       return(
                                         <div>
-                                        <tr>{Enum_TipoObjetivo[o.tipo]+': '+o.descripcion}
-                                        
-                                        </tr>
+                                        {Enum_TipoObjetivo[o.tipo]+': '+o.descripcion}                                  
                                         </div>
                                       );
                                })}   
@@ -129,7 +127,7 @@ const IndexProyectosPublic=()=>{
                                </Link>
                                </div>:<div><i class="text-yellow-600 hover:text-yellow-400 cursor-pointer"> Inactivo</i></div>
                                }
-                               </PrivateComponent>
+                               </PrivateComponent></td>
                         
                         <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
                         <td>

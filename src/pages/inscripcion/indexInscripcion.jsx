@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
 import PrivateComponent from "components/PrivateComponent";
 import PrivateRoute from "components/PrivateRouter";
-import { RECHAZAR_INSCRIPCION } from "graphql/estudiantes/mutation";
-import { APROBAR_INSCRIPCION } from "graphql/estudiantes/mutation";
+import { RECHAZAR_INSCRIPCION } from "graphql/inscripcion/mutation";
+import { APROBAR_INSCRIPCION } from "graphql/inscripcion/mutation";
 import { INSCRIPCIONES } from "graphql/inscripcion/query";
+
 
 import React ,{useEffect} from "react";
 import { toast } from "react-toastify";

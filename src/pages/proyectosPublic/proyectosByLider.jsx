@@ -64,6 +64,7 @@ const ProyectosByLider=()=>{
                         <td>{Enum_FaseProyecto[u.fase]}</td>
                         <td>{u.lider.nombre+' '+u.lider.apellido}</td>
                         <td>{new Intl.NumberFormat("co-CO",{style:"currency",currency:"COP"}).format(u.presupuesto)}</td>
+                        <td>
                         {u.objetivos.map((o)=>{
                                       return(
                                         <div>
@@ -87,7 +88,7 @@ const ProyectosByLider=()=>{
                                </div>:<div><i class="text-yellow-600 hover:text-yellow-400 cursor-pointer"> Inactivo</i></div>
                                }
                                </PrivateComponent>
-                    
+                               </td>
 
                         
                         <PrivateComponent roleList={['ADMINISTRADOR','LIDER']}>
