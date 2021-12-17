@@ -14,4 +14,11 @@ mutation RechazarInscripcion($_id: String!) {
     }
   }
 `
-export {APROBAR_INSCRIPCION,RECHAZAR_INSCRIPCION};
+const CREAR_INSCRIPCION=gql`
+mutation CrearInscripcion($proyecto: String!, $estudiante: String!) {
+  crearInscripcion(proyecto: $proyecto, estudiante: $estudiante) {
+    estado
+  }
+}
+`
+export {APROBAR_INSCRIPCION,RECHAZAR_INSCRIPCION,CREAR_INSCRIPCION};
