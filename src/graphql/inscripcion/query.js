@@ -38,6 +38,7 @@ query InscripcionByEstudiante($estudiante: String!) {
           nombre
           apellido
         }
+        observaciones
       }
       fase
       fechaInicio

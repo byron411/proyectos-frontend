@@ -61,9 +61,10 @@ const MisProyectos=()=>{
                                 {u.proyecto.avances.map((a)=>{
                                     return(
                                         <div>
-                                            <tr>{a.descripcion}</tr>
+                                            <tr className='text-green-600 font-bold my-4'>{a.descripcion}</tr>
                                             <tr>{a.fecha}</tr>
                                             <tr className='text-yellow-600 hover:text-yellow-400 cursor-pointer'>By: {a.creadoPor.nombre+' '+a.creadoPor.apellido}</tr>
+                                            <tr className='text-blue-600'>Observaciones: {a.oservaciones}</tr>
                                         </div>
                                         
                                     );
