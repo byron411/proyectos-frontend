@@ -29,6 +29,9 @@ import { CrearProyectoLider } from 'pages/proyectosPublic/crearProyectoLider';
 import { IndexInscripcion } from 'pages/inscripcion/indexInscripcion';
 import { MisProyectos } from 'pages/avances/misProyectos';
 import { CrearAvance } from 'pages/avances/crearAvance';
+import { MisInscripciones } from 'pages/inscripcion/misInscripciones';
+import { CrearObservacion } from 'pages/avances/crearObservacion';
+
 
 // import PrivateRoute from 'components/PrivateRoute';
 // const httplink=createHttpLink({
@@ -117,6 +120,11 @@ function App() {
               <Route path='/inscripciones' element={<IndexInscripcion/>}/>
               <Route path='/misProyectos' element={<MisProyectos/>}/>
               <Route path='/misProyectos/crearAvance/:proyecto/:creadoPor' element={<CrearAvance/>}/>
+
+              <Route path='/misInscripciones' element={<MisInscripciones/>}/>
+              <Route path='/misInscripciones/crearAvance/:proyecto/:creadoPor' element={<CrearAvance/>}/>
+              <Route path='/misProyectos/crearObservacion' element={<CrearObservacion/>}/>
+              
             </Route>
 
             <Route path="/auth" element={<AuthLayaout/>}>
