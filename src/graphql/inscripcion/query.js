@@ -22,13 +22,26 @@ query Inscripciones {
 const INSCRIPCIONES_BY_ESTUDIANTE=gql`
 query InscripcionByEstudiante($estudiante: String!) {
   inscripcionByEstudiante(estudiante: $estudiante) {
-    estado
     _id
+    estado
     fechaIngreso
     fechaEgreso
     proyecto {
       _id
       nombre
+      avances {
+        _id
+        fecha
+        descripcion
+        creadoPor {
+          _id
+          nombre
+          apellido
+        }
+      }
+      fase
+      fechaInicio
+      fechaFin
     }
     estudiante {
       _id
@@ -38,4 +51,20 @@ query InscripcionByEstudiante($estudiante: String!) {
   }
 }
 `
-export {INSCRIPCIONES,INSCRIPCIONES_BY_ESTUDIANTE};
+const AVANCE_BY_IDPROYECTO=gql`
+query FiltrarAvance($idProyecto: String!) {
+  filtrarAvance(idProyecto: $idProyecto) {
+    descripcion
+    _id
+    fecha
+    observaciones
+    creadoPor {
+      _id
+      nombre
+      apellido
+    }
+  }
+}
+`;
+
+export {INSCRIPCIONES,INSCRIPCIONES_BY_ESTUDIANTE,AVANCE_BY_IDPROYECTO};
